@@ -55,7 +55,7 @@ def calculate_deltas(old_file, new_file, output_dir):
                             while id_old > id_new :
                                 # Have we finished parsing new_file? then all old statements have been deleted
                                 if line_new is None:
-                                    print('Deleted statement: ' + id_old)
+                                    # print('Deleted statement: ' + id_old)
                                     write_statement_to_file(deleted_tsv, line_old, p_old)
                                     break
                                 # If node1, node2 and label are the same but the id is not, then it has been modified.
@@ -63,11 +63,11 @@ def calculate_deltas(old_file, new_file, output_dir):
                                     (line_new[p_new['node2']] == line_old[p_old['node2']]) and
                                     (line_new[p_new['label']] == line_old[p_old['label']])):
                                     write_statement_to_file(modified_tsv, line_new, p_new)
-                                    print('Modified statement: ' + id_new)
+                                    # print('Modified statement: ' + id_new)
                                     break
                                     # break because we need to increase id_old
                                 else:
-                                    print('Added statement: ' + id_new)
+                                    # print('Added statement: ' + id_new)
                                     write_statement_to_file(added_tsv, line_new, p_new)
                                 line_new = next(new_kgtk, None)
                                 if line_new is not None:
@@ -77,12 +77,12 @@ def calculate_deltas(old_file, new_file, output_dir):
                                     (line_new[p_new['node2']] == line_old[p_old['node2']]) and
                                     (line_new[p_new['label']] == line_old[p_old['label']])):
                                     write_statement_to_file(modified_tsv, line_new, p_new)
-                                    print('Modified statement: ' + id_new)
+                                    # print('Modified statement: ' + id_new)
                                     line_new = next(new_kgtk, None)
                                     if line_new is not None:
                                         id_new = line_new[p_new['id']]
                                 else:
-                                    print('Deleted statement: ' + id_old)
+                                    # print('Deleted statement: ' + id_old)
                                     write_statement_to_file(deleted_tsv, line_old, p_old)
                             else:
                                 # if both are the same, then continue
@@ -91,7 +91,7 @@ def calculate_deltas(old_file, new_file, output_dir):
                                     id_new = line_new[p_new['id']]
                         # The remaining statements (if any) belong to the added file
                         while line_new is not None:
-                            print('Added statement1: ' + id_new)
+                            # print('Added statement1: ' + id_new)
                             write_statement_to_file(added_tsv, line_new, p_new)
                             line_new = next(new_kgtk, None)
                             if line_new is not None:
